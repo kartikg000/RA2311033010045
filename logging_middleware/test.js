@@ -1,0 +1,11 @@
+const { Log, setToken } = require('./index');
+
+// Paste your access token here
+setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJrZzI4MzRAc3JtaXN0LmVkdS5pbiIsImV4cCI6MTc3NzY5OTQ2NSwiaWF0IjoxNzc3Njk4NTY1LCJpc3MiOiJBZmZvcmQgTWVkaWNhbCBUZWNobm9sb2dpZXMgUHJpdmF0ZSBMaW1pdGVkIiwianRpIjoiM2Q0MTJmNjItOTE3ZS00M2EzLWI3YjgtNGE5MzVjYmZmN2Q2IiwibG9jYWxlIjoiZW4tSU4iLCJuYW1lIjoia2FydGlrIGd1cHRhIiwic3ViIjoiZjRjNTgzYjYtNWI3OC00NTk1LWE1YmQtY2YwODhmY2NkMzE2In0sImVtYWlsIjoia2cyODM0QHNybWlzdC5lZHUuaW4iLCJuYW1lIjoia2FydGlrIGd1cHRhIiwicm9sbE5vIjoicmEyMzExMDMzMDEwMDQ1IiwiYWNjZXNzQ29kZSI6IlFrYnB4SCIsImNsaWVudElEIjoiZjRjNTgzYjYtNWI3OC00NTk1LWE1YmQtY2YwODhmY2NkMzE2IiwiY2xpZW50U2VjcmV0IjoielhIYlpNcnB0TWhCbXZHUyJ9.FjtdSh3q9_kUrAJpslv3UlWaeZDlrFRaFZ2PtaaT2nc');
+
+async function test() {
+    const result = await Log('frontend', 'info', 'utils', 'Logging middleware test successful');
+    console.log(result);
+}
+
+test();
