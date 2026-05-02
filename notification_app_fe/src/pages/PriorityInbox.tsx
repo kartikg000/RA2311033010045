@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getNotifications, getPriorityNotifications, AppNotification } from '../api';
+import * as api from '../api';
+import type { AppNotification } from '../api';
 import { Log } from '../logger';
 import {
     Card, CardContent, Typography, Chip,
@@ -15,8 +16,8 @@ export default function PriorityInbox() {
     useEffect(() => {
         async function load() {
             await Log('frontend', 'info', 'page', 'PriorityInbox page loaded');
-            const data = await getNotifications();
-            const priority = getPriorityNotifications(data, topN);
+            const data = await api.getNotifications();
+            const priority = api.getPriorityNotifications(data, topN);
             setNotifications(priority);
             setLoading(false);
         }
@@ -42,7 +43,7 @@ export default function PriorityInbox() {
                 value={topN}
                 onChange={e => setTopN(Number(e.target.value))}
                 sx={{ mb: 2 }}
-                inputProps={{ min: 1, max: 50 }}
+                inputprops={{ min: 1, max: 50 }}
             />
 
             {loading ? <CircularProgress /> : notifications.map((n, i) => (

@@ -1,12 +1,12 @@
 import { Log } from './logger';
 
-const BASE = 'http://20.207.122.201/evaluation-service';
-const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJrZzI4MzRAc3JtaXN0LmVkdS5pbiIsImV4cCI6MTc3NzcwMDgyMiwiaWF0IjoxNzc3Njk5OTIyLCJpc3MiOiJBZmZvcmQgTWVkaWNhbCBUZWNobm9sb2dpZXMgUHJpdmF0ZSBMaW1pdGVkIiwianRpIjoiZTQ4MWM1ZTMtNzZlNC00NTRlLTgyMDAtNDdkNjgzOTg2ZDQ1IiwibG9jYWxlIjoiZW4tSU4iLCJuYW1lIjoia2FydGlrIGd1cHRhIiwic3ViIjoiZjRjNTgzYjYtNWI3OC00NTk1LWE1YmQtY2YwODhmY2NkMzE2In0sImVtYWlsIjoia2cyODM0QHNybWlzdC5lZHUuaW4iLCJuYW1lIjoia2FydGlrIGd1cHRhIiwicm9sbE5vIjoicmEyMzExMDMzMDEwMDQ1IiwiYWNjZXNzQ29kZSI6IlFrYnB4SCIsImNsaWVudElEIjoiZjRjNTgzYjYtNWI3OC00NTk1LWE1YmQtY2YwODhmY2NkMzE2IiwiY2xpZW50U2VjcmV0IjoielhIYlpNcnB0TWhCbXZHUyJ9.6qJWYH2CsI3vo0-FKt6IzPm7DYcy20BmhLq6jyEGfxc';
+const BASE = '/api/evaluation-service';
+export const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJrZzI4MzRAc3JtaXN0LmVkdS5pbiIsImV4cCI6MTc3NzcwNDU2NCwiaWF0IjoxNzc3NzAzNjY0LCJpc3MiOiJBZmZvcmQgTWVkaWNhbCBUZWNobm9sb2dpZXMgUHJpdmF0ZSBMaW1pdGVkIiwianRpIjoiYjk4MTY2ZmYtMTZhYy00NDM4LTllNDMtOTU2YzEwY2IzZjc0IiwibG9jYWxlIjoiZW4tSU4iLCJuYW1lIjoia2FydGlrIGd1cHRhIiwic3ViIjoiZjRjNTgzYjYtNWI3OC00NTk1LWE1YmQtY2YwODhmY2NkMzE2In0sImVtYWlsIjoia2cyODM0QHNybWlzdC5lZHUuaW4iLCJuYW1lIjoia2FydGlrIGd1cHRhIiwicm9sbE5vIjoicmEyMzExMDMzMDEwMDQ1IiwiYWNjZXNzQ29kZSI6IlFrYnB4SCIsImNsaWVudElEIjoiZjRjNTgzYjYtNWI3OC00NTk1LWE1YmQtY2YwODhmY2NkMzE2IiwiY2xpZW50U2VjcmV0IjoielhIYlpNcnB0TWhCbXZHUyJ9.qQqwTsiPEA2xJhkXriz9BBJyKXt6Rou-hylv3KPA3XM';
 
-const headers = {
+const getHeaders = () => ({
     'Authorization': `Bearer ${TOKEN}`,
     'Content-Type': 'application/json'
-};
+});
 
 export interface AppNotification {
     ID: string;
@@ -19,7 +19,7 @@ export async function getNotifications(params: Record<string, string> = {}): Pro
     const query = new URLSearchParams(params).toString();
     const url = `${BASE}/notifications${query ? '?' + query : ''}`;
     await Log('frontend', 'info', 'api', `Fetching notifications with params: ${JSON.stringify(params)}`);
-    const res = await fetch(url, { headers });
+    const res = await fetch(url, { headers: getHeaders() });
     const data = await res.json();
     await Log('frontend', 'info', 'api', `Fetched ${data.notifications?.length} notifications`);
     return data.notifications || [];

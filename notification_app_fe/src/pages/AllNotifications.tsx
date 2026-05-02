@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getNotifications, AppNotification } from '../api';
+import * as api from '../api';
+import type { AppNotification } from '../api';
 import { Log } from '../logger';
 import {
     Card, CardContent, Typography, Chip,
@@ -17,7 +18,7 @@ export default function AllNotifications() {
         async function load() {
             await Log('frontend', 'info', 'page', 'AllNotifications page loaded');
             const params = filter ? { notification_type: filter } : {};
-            const data = await getNotifications(params);
+            const data = await api.getNotifications(params);
             setNotifications(data);
             setLoading(false);
         }
